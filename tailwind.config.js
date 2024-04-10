@@ -2,7 +2,14 @@
 export default {
     content: ["./index.html", "./src/**/*.{js,ts,jsx,tsx}"],
     theme: {
-        extend: {},
+        extend: {
+            colors: {
+                gentigreen: "#00FF20",
+            },
+        },
+        fontFamily: {
+            pretendard: ["Pretendard"],
+        },
     },
-    plugins: [],
+    plugins: [require("tailwind-scrollbar-hide")],
 };

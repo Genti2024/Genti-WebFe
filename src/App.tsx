@@ -1,11 +1,13 @@
-import "./App.css";
+import { Route, Routes } from "react-router-dom";
+import MainPage from "./pages/MainPage";
 
 function App() {
     return (
-        <>
-            <div className="font-bold text-lg bg-slate-300">Genti</div>
-            <div className="text-3xl font-bold underline">Hello world!</div>
-        </>
+        <div className="w-screen h-[1px] min-h-screen font-pretendard">
+            <Routes>
+                <Route path="/" element={<MainPage />} />
+            </Routes>
+        </div>
     );
 }
 
