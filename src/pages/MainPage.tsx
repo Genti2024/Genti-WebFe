@@ -51,9 +51,10 @@ const test = [
 
 const MainPage = () => {
     const [selected, setSelected] = useState<number>(0);
+
     return (
         <div className="w-full h-full px-8 flex flex-col gap-8 scrollbar-hide">
-            <HamburgerBar className="my-14" />
+            <HamburgerBar className="mt-14" />
             <div className="w-full flex items-end">
                 <h1>
                     <p className="text-[1.25rem]">안녕하세요.</p>
@@ -101,7 +102,6 @@ const MainPage = () => {
                     </div>
                 </div>
             </div>
-
             <GreenCloudSvg className="absolute top-0 left-0 -z-10" />
         </div>
     );
