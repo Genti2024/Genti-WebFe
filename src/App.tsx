@@ -3,7 +3,7 @@ import MainPage from "./pages/MainPage";
 
 function App() {
     return (
-        <div className="w-screen h-[1px] min-h-screen font-pretendard">
+        <div className="w-screen h-[1px] min-h-screen">
             <Routes>
                 <Route path="/" element={<MainPage />} />
             </Routes>
