@@ -5,6 +5,7 @@ import { useState } from "react";
 import DownloadSvg from "@/components/svg/DownloadSvg";
 import Button from "@/components/common/Button";
 import SubmitModal from "./SubmitModal";
+import FooterBox from "../common/FooterBox";
 
 const test = [
     {
@@ -110,9 +111,7 @@ const WorkSpace = () => {
     const [selected, setSelected] = useState<number>(0);
 
     return (
-        <div className="relative right-8 w-[calc(100%+4rem)] flex-grow shadow-[0px_-3px_20px_2px_rgba(0,0,0,0.1)] rounded-t-3xl bg-white flex flex-col items-center">
-            <h2 className="my-4">내 작업실</h2>
-            <div className="w-full border-b-2"></div>
+        <FooterBox title="내 작업실">
             <div className="w-full flex flex-row flex-nowrap items-center overflow-x-scroll scrollbar-hide">
                 {test.map((item, index) => (
                     <div key={item.title} className="py-4 w-1/3 flex-grow-0 flex-shrink-0 flex items-center justify-center" onClick={() => setSelected(index)}>
@@ -130,7 +129,7 @@ const WorkSpace = () => {
                     제출 제한 시간은 6시간이며, 2시간 내로 제출시 5,500원, 4시간 내로 제출시 4,500원 6시간 내로 제출시 3,500원이 지급되어요.
                 </p>
             </div>
-        </div>
+        </FooterBox>
     );
 };
 

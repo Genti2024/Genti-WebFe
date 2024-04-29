@@ -1,19 +1,17 @@
 import GreenCloudSvg from "@/components/svg/GreenCloudSvg";
+import MainHeader from "@/components/common/Header";
 import NewWorkAlarm from "@/components/workspace/NewWorkAlarm";
-import WorkSpace from "@/components/workspace/WorkSpace";
-import MainHeader from "@/components/workspace/Header";
-import WorkState from "@/components/workspace/WorkState";
+import { Outlet } from "react-router-dom";
 
-const MainPage = () => {
+const Layout = () => {
     return (
         <div className="relative w-full h-full px-8 flex flex-col gap-8 scrollbar-hide">
             <NewWorkAlarm />
             <MainHeader />
-            <WorkState />
-            <WorkSpace />
+            <Outlet />
             <GreenCloudSvg className="absolute top-0 left-0 -z-10" />
         </div>
     );
 };
 
-export default MainPage;
+export default Layout;

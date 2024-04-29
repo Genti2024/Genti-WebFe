@@ -5,7 +5,7 @@ import GreenAlarm from "@/assets/img/GreenAlarm.webp";
 import Modal from "@/components/common/Modal";
 
 const NewWorkAlarm = () => {
-    const [alarmOpen, setAlarmOpen] = useState<boolean>(true);
+    const [alarmOpen, setAlarmOpen] = useState<boolean>(false);
     const [modalOpen, setModalOpen] = useState<boolean>(false);
 
     useEffect(() => {
