@@ -1,15 +1,25 @@
-import { useEffect, useState } from "react";
+import { useEffect, useRef, useState } from "react";
 
-const ToggleButton = ({ initToggleState, onToggleOn, onToggleClose }: { initToggleState?: boolean; onToggleOn?: () => void; onToggleClose?: () => void }) => {
-    const [isToggled, setIsToggled] = useState<boolean>(initToggleState || false);
+const ToggleButton = ({ initToggleState, onToggleOn, onToggleClose }: { initToggleState?: boolean; onToggleOn: () => void; onToggleClose?: () => void }) => {
+    const [isToggled, setIsToggled] = useState<boolean>(initToggleState ?? false);
+    const hasRendered = useRef<boolean>(false);
 
     useEffect(() => {
-        if (isToggled) {
-            onToggleOn?.();
-        } else {
-            onToggleClose?.();
+        if (hasRendered.current) {
+            if (isToggled) {
+                onToggleOn?.();
+            } else {
+                onToggleClose?.();
+            }
         }
-    }, [isToggled, onToggleOn, onToggleClose]);
+
+        hasRendered.current = true;
+        // eslint-disable-next-line react-hooks/exhaustive-deps
+    }, [isToggled]);
+
+    useEffect(() => {
+        setIsToggled(initToggleState ?? false);
+    }, [initToggleState]);
 
     return (
         <button

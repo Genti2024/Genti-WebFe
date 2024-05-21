@@ -1,4 +1,3 @@
-import Folder from "@/assets/img/Folder.webp";
 import TestCharacter from "@/assets/img/TestCharacter.png";
 import PurpleAlarm from "@/assets/img/PurpleAlarm.webp";
 import { useState } from "react";
@@ -50,6 +49,7 @@ const test = [
     },
 ];
 
+/*
 const EmptyWorkSpace = () => {
     return (
         <div className="flex flex-col items-center gap-1 py-8">
@@ -58,7 +58,7 @@ const EmptyWorkSpace = () => {
         </div>
     );
 };
-
+*/
 const CurrentWorkSpace = () => {
     const [submitModalOpened, setSubmitModalOpened] = useState<boolean>(false);
     return (

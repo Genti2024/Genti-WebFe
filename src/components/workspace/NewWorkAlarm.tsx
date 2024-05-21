@@ -3,18 +3,23 @@ import Button from "@/components/common/Button";
 import FooterModal from "@/components/common/FooterModal";
 import GreenAlarm from "@/assets/img/GreenAlarm.webp";
 import Modal from "@/components/common/Modal";
+import pictureQuery from "@/hooks/query/pictureServices/usePictureServices";
+import pictureMutation from "@/hooks/mutation/pictureMutation/usePictureMutation";
 
 const NewWorkAlarm = () => {
     const [alarmOpen, setAlarmOpen] = useState<boolean>(false);
     const [modalOpen, setModalOpen] = useState<boolean>(false);
 
-    useEffect(() => {
-        const event = new EventSource("http://localhost:8080/api/v1/work");
+    const { data: currentMatch } = pictureQuery.useCurrentMatchQuery();
+    const { mutate: mutateMatch } = pictureMutation.usePicReqStatusMutation();
 
-        event.addEventListener("message", () => {
+    useEffect(() => {
+        if (currentMatch?.success) {
             setAlarmOpen(true);
-        });
-    }, []);
+        } else {
+            setAlarmOpen(false);
+        }
+    }, [currentMatch]);
 
     return (
         <>
@@ -26,16 +31,16 @@ const NewWorkAlarm = () => {
                         </h2>
                         <div className="border bg-gray-100 border-gray-300 rounded-md w-full p-2">
                             <p className="whitespace-pre-line">
-                                {`고려대학교 중앙광장에서 빨간색 과잠을 입고 앉아서 막걸리 먹는 모습을 만들어줘 
+                                {`${currentMatch?.response?.prompt} 
 
-            카메라 앵글 : 위에서 촬영 
-            카메라 프레임 : 바스트샷
-            (상반신)`}
+            카메라 앵글 : ${currentMatch?.response?.cameraAngle}
+            샷 커버리지 : ${currentMatch?.response?.shotCoverage}
+`}
                             </p>
                         </div>
                         <div className="w-full flex flex-col gap-2">
                             <Button
-                                active={true}
+                                active
                                 onClick={() => {
                                     setAlarmOpen(false);
                                     setModalOpen(true);
@@ -43,9 +48,11 @@ const NewWorkAlarm = () => {
                                 text="수락하기"
                             />
                             <Button
-                                active={false}
+                                active
+                                className="text-grey2 bg-grey6"
                                 onClick={() => {
                                     setAlarmOpen(false);
+                                    mutateMatch({ id: currentMatch?.response?.requestId ?? 0, action: "reject" });
                                 }}
                                 text="거절하기"
                             />
@@ -66,6 +73,7 @@ const NewWorkAlarm = () => {
                             <button
                                 className="w-1/2 text-[#989898] p-2"
                                 onClick={() => {
+                                    mutateMatch({ id: currentMatch?.response?.requestId ?? 0, action: "accept" });
                                     setModalOpen(false);
                                 }}
                             >

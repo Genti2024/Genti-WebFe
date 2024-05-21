@@ -5,8 +5,10 @@ import Layout from "./pages/Layout";
 import MyPage from "./pages/mypage/MyPage";
 import AccountPage from "./pages/account/AccountPage";
 import SettingPage from "./pages/setting/SettingPage";
+import loginQuery from "./hooks/query/loginServices/useLoginServices";
 
 function App() {
+    loginQuery.useLoginQuery();
     return (
         <div className="w-screen h-[1px] min-h-screen">
             <Routes>
